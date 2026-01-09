@@ -25,10 +25,18 @@ const novaAcaoModal = document.getElementById("novaAcaoModal");
 
 // AUTH
 auth.onAuthStateChanged(user => {
-  loginArea.style.display = user ? "none" : "block";
-  appArea.style.display = user ? "block" : "none";
-  if (user) renderCalendario();
+  if (user) {
+    loginArea.style.display = "none";
+    appArea.style.display = "block";
+    renderCalendario();
+  } else {
+    loginArea.style.display = "block";
+    appArea.style.display = "none";
+  }
+
+  document.body.style.display = "block"; // 👈 MOSTRA TUDO AGORA
 });
+
 
 // CALENDÁRIO
 function renderCalendario(){
