@@ -1,19 +1,40 @@
-body { background:#f8f9fa; }
+body {
+  background:#f4f6f9;
+  font-family:Segoe UI,Arial;
+}
+
+#login-area .card {
+  max-width:400px;
+  margin:auto;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
 
 .calendar-day {
-  min-height: 90px;
-  border: 1px solid #dee2e6;
-  background: white;
-  cursor: pointer;
+  min-height:80px;
+  margin:3px;
+  padding:6px;
+  background:#fff;
+  border-radius:10px;
+  border:1px solid #e1e5eb;
+}
+
+.calendar-day:hover { background:#eef3ff; }
+
+.today {
+  border:2px solid #2c7be5;
+  background:#eaf1ff;
 }
 
 .event {
-  font-size: 12px;
-  background: #e3f2fd;
-  margin: 2px;
-  padding: 2px 4px;
-  border-radius: 4px;
+  font-size:11px;
+  color:#fff;
+  padding:4px 6px;
+  border-radius:6px;
+  margin-bottom:4px;
 }
-.event:hover {
-  background: #bbdefb;
-}
+
+.event.padrao { background:#2c7be5; }
+.event.campanha { background:#28a745; }
+.event.reuniao { background:#ffc107; color:#000; }
+.event.cobertura { background:#17a2b8; }
