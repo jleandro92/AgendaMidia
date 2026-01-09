@@ -12,11 +12,9 @@
 
 <!-- LOGIN -->
 <div id="login-area" class="container mt-5">
-  <div class="card p-4 text-center">
+  <div class="card p-4 text-center shadow">
     <h4 class="mb-3">Agenda de Mídia</h4>
-    <button class="btn btn-danger w-100" onclick="loginGoogle()">
-      Entrar com Google
-    </button>
+    <button class="btn btn-danger w-100" onclick="loginGoogle()">Entrar com Google</button>
   </div>
 </div>
 
@@ -30,10 +28,8 @@
       <button class="btn btn-outline-primary btn-sm" onclick="proximoMes()">▶</button>
     </div>
 
-    <div class="text-center mb-2">
-      <button class="btn btn-outline-secondary btn-sm" onclick="toggleAgenda()">
-        Alternar visão
-      </button>
+    <div class="text-end mb-2">
+      <button class="btn btn-outline-secondary btn-sm" onclick="toggleAgenda()">Alternar Agenda</button>
     </div>
 
     <div class="row text-center fw-bold">
@@ -45,7 +41,7 @@
     <div id="calendar-days"></div>
     <div id="agenda-lista" style="display:none;"></div>
 
-    <div class="text-end mt-2">
+    <div class="text-end mt-3">
       <button class="btn btn-outline-danger btn-sm" onclick="logout()">Sair</button>
     </div>
   </div>
@@ -55,6 +51,7 @@
 <div class="modal fade" id="novaAcaoModal">
   <div class="modal-dialog">
     <div class="modal-content p-3">
+
       <input type="hidden" id="eventoId">
 
       <input type="date" id="dataAcao" class="form-control mb-2">
@@ -62,21 +59,15 @@
       <input type="text" id="local" class="form-control mb-2" placeholder="Local">
       <input type="time" id="hora" class="form-control mb-2">
 
-      <select id="tipo" class="form-control mb-3">
-        <option value="padrao">Padrão</option>
-        <option value="campanha">Campanha</option>
-        <option value="reuniao">Reunião</option>
-        <option value="cobertura">Cobertura</option>
-      </select>
-      <select id="status" class="form-control mb-3">
+      <select id="status" class="form-select mb-3">
         <option value="agendado">Agendado</option>
         <option value="concluido">Concluído</option>
         <option value="cancelado">Cancelado</option>
       </select>
 
-
       <button class="btn btn-primary w-100 mb-2" onclick="salvarEvento()">Salvar</button>
       <button class="btn btn-danger w-100" onclick="excluirEvento()">Excluir</button>
+
     </div>
   </div>
 </div>
