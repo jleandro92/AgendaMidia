@@ -38,3 +38,18 @@ body {
 .event.campanha { background:#28a745; }
 .event.reuniao { background:#ffc107; color:#000; }
 .event.cobertura { background:#17a2b8; }
+
+.status-agendado {
+  border-left: 4px solid #0d6efd;
+}
+
+.status-concluido {
+  border-left: 4px solid #198754;
+  opacity: 0.7;
+}
+
+.status-cancelado {
+  border-left: 4px solid #dc3545;
+  text-decoration: line-through;
+}
+

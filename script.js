@@ -22,6 +22,7 @@ const local = document.getElementById("local");
 const hora = document.getElementById("hora");
 const tipo = document.getElementById("tipo");
 const novaAcaoModal = document.getElementById("novaAcaoModal");
+const statusEvento = document.getElementById("status");
 
 // ================= AUTENTICAÇÃO =================
 auth.onAuthStateChanged(user => {
@@ -108,8 +109,10 @@ function abrirModal(data){
   local.value = "";
   hora.value = "";
   tipo.value = "padrao";
+  statusEvento.value = "agendado";
   new bootstrap.Modal(novaAcaoModal).show();
 }
+
 
 function salvarEvento(){
   const ev = {
@@ -117,8 +120,20 @@ function salvarEvento(){
     titulo: titulo.value,
     local: local.value,
     hora: hora.value,
-    tipo: tipo.value
+    tipo: tipo.value,
+    status: statusEvento.value
   };
+
+  if (eventoId.value) {
+    db.collection("eventos").doc(eventoId.value).update(ev);
+  } else {
+    db.collection("eventos").add(ev);
+  }
+
+  bootstrap.Modal.getInstance(novaAcaoModal).hide();
+  carregarEventos();
+}
+
 
   if(eventoId.value){
     db.collection("eventos").doc(eventoId.value).update(ev);
@@ -131,12 +146,20 @@ function salvarEvento(){
 }
 
 function excluirEvento(){
-  if(eventoId.value){
-    db.collection("eventos").doc(eventoId.value).delete();
-    bootstrap.Modal.getInstance(novaAcaoModal).hide();
-    carregarEventos();
+  if (!eventoId.value) {
+    alert("Evento não selecionado");
+    return;
+  }
+
+  if (confirm("Deseja excluir este evento?")) {
+    db.collection("eventos").doc(eventoId.value).delete()
+      .then(() => {
+        bootstrap.Modal.getInstance(novaAcaoModal).hide();
+        carregarEventos();
+      });
   }
 }
+
 
 function carregarEventos(){
   document.querySelectorAll(".eventos-dia").forEach(d => d.innerHTML = "");
@@ -146,17 +169,18 @@ function carregarEventos(){
       const e = doc.data();
       const div = document.getElementById("e-" + e.data);
 
-      if(div){
+      if (div) {
         div.innerHTML += `
-          <div class="event ${e.tipo || "padrao"}"
-               onclick="editarEvento(
-                 '${doc.id}',
-                 '${e.data}',
-                 '${e.titulo}',
-                 '${e.local}',
-                 '${e.hora}',
-                 '${e.tipo || "padrao"}'
-               )">
+          <div class="event ${e.tipo || "padrao"} status-${e.status || "agendado"}"
+            onclick="editarEvento(
+              '${doc.id}',
+              '${e.data}',
+              '${e.titulo}',
+              '${e.local}',
+              '${e.hora}',
+              '${e.tipo || "padrao"}',
+              '${e.status || "agendado"}'
+            )">
             ${e.titulo}
           </div>`;
       }
@@ -164,15 +188,19 @@ function carregarEventos(){
   });
 }
 
-function editarEvento(id, data, t, l, h, tp){
+
+function editarEvento(id, data, t, l, h, tp, st){
   eventoId.value = id;
   dataAcao.value = data;
   titulo.value = t;
   local.value = l;
   hora.value = h;
   tipo.value = tp;
+  statusEvento.value = st;
+
   new bootstrap.Modal(novaAcaoModal).show();
 }
+
 
 // ================= AGENDA =================
 function toggleAgenda(){
