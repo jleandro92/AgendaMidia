@@ -113,7 +113,6 @@ function abrirModal(data){
   new bootstrap.Modal(novaAcaoModal).show();
 }
 
-
 function salvarEvento(){
   const ev = {
     data: dataAcao.value,
@@ -125,17 +124,6 @@ function salvarEvento(){
   };
 
   if (eventoId.value) {
-    db.collection("eventos").doc(eventoId.value).update(ev);
-  } else {
-    db.collection("eventos").add(ev);
-  }
-
-  bootstrap.Modal.getInstance(novaAcaoModal).hide();
-  carregarEventos();
-}
-
-
-  if(eventoId.value){
     db.collection("eventos").doc(eventoId.value).update(ev);
   } else {
     db.collection("eventos").add(ev);
