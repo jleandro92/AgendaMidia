@@ -1,0 +1,19 @@
+body { background:#f8f9fa; }
+
+.calendar-day {
+  min-height: 90px;
+  border: 1px solid #dee2e6;
+  background: white;
+  cursor: pointer;
+}
+
+.event {
+  font-size: 12px;
+  background: #e3f2fd;
+  margin: 2px;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.event:hover {
+  background: #bbdefb;
+}
